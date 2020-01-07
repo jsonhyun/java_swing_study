@@ -1,20 +1,21 @@
 package java_swing_study.ch09.layout;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class LayoutMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JButton btnFlowLayout;
+	private JButton btnBorderLayout;
 
 	/**
 	 * Launch the application.
@@ -50,15 +51,26 @@ public class LayoutMain extends JFrame implements ActionListener {
 		btnFlowLayout = new JButton("FlowLayout");
 		btnFlowLayout.addActionListener(this);
 		contentPane.add(btnFlowLayout);
+		
+		btnBorderLayout = new JButton("BorderLayout");
+		btnBorderLayout.addActionListener(this);
+		contentPane.add(btnBorderLayout);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBorderLayout) {
+			btnBorderLayoutActionPerformed(e);
+		}
 		if (e.getSource() == btnFlowLayout) {
 			btnFlowLayoutActionPerformed(e);
 		}
 	}
 	protected void btnFlowLayoutActionPerformed(ActionEvent e) {
 		FlowLayoutEx frame = new FlowLayoutEx();
+		frame.setVisible(true);
+	}
+	protected void btnBorderLayoutActionPerformed(ActionEvent e) {
+		BorderLayoutEx frame = new BorderLayoutEx();
 		frame.setVisible(true);
 	}
 }
