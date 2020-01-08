@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import java_swing_study.ch09.layout.openchallenge.OperChallengeEx;
+
 @SuppressWarnings("serial")
 public class LayoutMain extends JFrame implements ActionListener {
 
@@ -18,6 +20,7 @@ public class LayoutMain extends JFrame implements ActionListener {
 	private JButton btnBorderLayout;
 	private JButton btnNewButton;
 	private JButton btnAbsoluteLayout;
+	private JButton btnOpenChallenge;
 
 	/**
 	 * Launch the application.
@@ -44,7 +47,7 @@ public class LayoutMain extends JFrame implements ActionListener {
 	private void initialize() {
 		setTitle("배치레이아웃예제");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 150);
+		setBounds(100, 100, 450, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(null, "레이아웃 예제", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(contentPane);
@@ -65,9 +68,16 @@ public class LayoutMain extends JFrame implements ActionListener {
 		btnAbsoluteLayout = new JButton("AbsoluteLayout");
 		btnAbsoluteLayout.addActionListener(this);
 		contentPane.add(btnAbsoluteLayout);
+		
+		btnOpenChallenge = new JButton("OpenChallenge");
+		btnOpenChallenge.addActionListener(this);
+		contentPane.add(btnOpenChallenge);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnOpenChallenge) {
+			btnOpenChallengeActionPerformed(e);
+		}
 		if (e.getSource() == btnAbsoluteLayout) {
 			btnAbsoluteLayoutActionPerformed(e);
 		}
@@ -95,6 +105,10 @@ public class LayoutMain extends JFrame implements ActionListener {
 	}
 	protected void btnAbsoluteLayoutActionPerformed(ActionEvent e) {
 		AbsoluteLayoutEx frame = new AbsoluteLayoutEx();
+		frame.setVisible(true);
+	}
+	protected void btnOpenChallengeActionPerformed(ActionEvent e) {
+		OperChallengeEx frame = new OperChallengeEx();
 		frame.setVisible(true);
 	}
 }
