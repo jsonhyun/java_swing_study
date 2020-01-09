@@ -1,7 +1,5 @@
 package java_swing_study.ch10;
 
-import javax.swing.JTextField;
-
 public class Student {
 	private String name;
 	private int stdNo;
@@ -14,6 +12,10 @@ public class Student {
 		this.stdNo = stdNo;
 		this.dept = dept;
 		this.subj = subj;
+	}
+	
+	public Student() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {

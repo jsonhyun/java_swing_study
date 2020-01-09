@@ -1,27 +1,24 @@
 package java_swing_study.ch10;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-import org.omg.CORBA.INTERNAL;
-
-import javax.swing.JPasswordField;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class FocusListenerEx extends JFrame implements ActionListener {
@@ -41,6 +38,8 @@ public class FocusListenerEx extends JFrame implements ActionListener {
 	private JLabel lblConfirm;
 	private JButton btnOk;
 	private JButton btnCancel;
+	private Student student;
+	private JButton btnSet;
 
 	public FocusListenerEx() {
 		initialize();
@@ -98,13 +97,10 @@ public class FocusListenerEx extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "학번을 입력하세요.");
 					tfNo.requestFocus();
 				}
-				
 			}
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				
-				
 			}
 		});
 		tfNo.setColumns(10);
@@ -213,7 +209,12 @@ public class FocusListenerEx extends JFrame implements ActionListener {
 		contentPane.add(btnOk);
 		
 		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		contentPane.add(btnCancel);
+		
+		btnSet = new JButton("SET");
+		btnSet.addActionListener(this);
+		contentPane.add(btnSet);
 	}
 	
 	public JTextField getTfSubj() {
@@ -228,6 +229,12 @@ public class FocusListenerEx extends JFrame implements ActionListener {
 		frame.getTfSubj().requestFocus();
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSet) {
+			btnSetActionPerformed(e);
+		}
+		if (e.getSource() == btnCancel) {
+			btnCancelActionPerformed(e);
+		}
 		if (e.getSource() == btnOk) {
 			btnOkActionPerformed(e);
 		}
@@ -237,9 +244,26 @@ public class FocusListenerEx extends JFrame implements ActionListener {
 		int stdNo = Integer.parseInt(tfNo.getText().trim());
 		String dept = tfDept.getText().trim();
 		String subj = tfSubj.getText().trim();
-		Student student = new Student(name, stdNo, dept, subj);
-//		student.getName(),student.getStdNo(), student.getDept(),student.getSubj()
+		student = new Student(name, stdNo, dept, subj);
 		JOptionPane.showMessageDialog(null, student.toString());
+	}
+
+	protected void btnSetActionPerformed(ActionEvent e) {
+		
+		String name = student.getName();
+		String stdNo = Integer.toString(student.getStdNo());
+		String dept = student.getDept();
+		String subj = student.getSubj();
+		tfName.setText(name);
+		tfNo.setText(stdNo);
+		tfDept.setText(dept);
+		tfSubj.setText(subj);
+	}
+	protected void btnCancelActionPerformed(ActionEvent e) {
+		tfName.setText("");
+		tfNo.setText("");
+		tfDept.setText("");
+		tfSubj.setText("");
 	}
 }
 
