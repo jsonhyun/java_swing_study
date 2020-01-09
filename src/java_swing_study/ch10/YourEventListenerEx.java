@@ -99,7 +99,6 @@ public class YourEventListenerEx extends JFrame implements ActionListener {
 				}else {
 					contentPane.setBackground(Color.RED);
 				}
-				
 			}
 		});
 		panel_3.add(btn04, BorderLayout.CENTER);
@@ -113,9 +112,7 @@ public class YourEventListenerEx extends JFrame implements ActionListener {
 			}else {
 				contentPane.setBackground(Color.RED);
 			}
-			
 		}
-		
 	}
 
 	public void actionPerformed(ActionEvent e) {
