@@ -24,6 +24,7 @@ public class EventListenerEx extends JFrame implements ActionListener{
 	private JButton btn08;
 	private JButton btn09;
 	private JButton btn10;
+	private JButton btn11;
 
 	/**
 	 * Launch the application.
@@ -117,6 +118,9 @@ public class EventListenerEx extends JFrame implements ActionListener{
 		btn10 = new JButton("부모클래스(윈도우빌더)");
 		btn10.addActionListener(this);
 		contentPane.add(btn10);
+		
+		btn11 = new JButton("마우스 이벤트");
+		contentPane.add(btn11);
 	}
 	
 	class MyAction3Listener implements ActionListener{
