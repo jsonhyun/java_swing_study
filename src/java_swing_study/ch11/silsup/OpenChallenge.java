@@ -111,8 +111,6 @@ public class OpenChallenge extends JFrame implements ActionListener {
 			i = 3;
 		}
 		lblImg.setIcon(image.get(i));
-		
-		
 	}
 	protected void btnNextActionPerformed(ActionEvent e) {
 		i++;
