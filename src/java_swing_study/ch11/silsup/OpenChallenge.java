@@ -28,9 +28,7 @@ public class OpenChallenge extends JFrame implements ActionListener {
 	private JButton btnNext;
 	private int i = 0;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,9 +42,7 @@ public class OpenChallenge extends JFrame implements ActionListener {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public OpenChallenge() {
 		image = new ArrayList<ImageIcon>();
 		String imgDirPath = System.getProperty("user.dir")+"\\images\\";
