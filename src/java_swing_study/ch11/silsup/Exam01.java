@@ -11,7 +11,8 @@ import javax.swing.JButton;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-public class Exam1 extends JFrame implements ChangeListener {
+@SuppressWarnings("serial")
+public class Exam01 extends JFrame implements ChangeListener {
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -20,14 +21,11 @@ public class Exam1 extends JFrame implements ChangeListener {
 	private JCheckBox chckbxHidden;
 	private JButton btn1;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Exam1 frame = new Exam1();
+					Exam01 frame = new Exam01();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,13 +34,11 @@ public class Exam1 extends JFrame implements ChangeListener {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public Exam1() {
+	public Exam01() {
 		initialize();
 	}
 	private void initialize() {
+		setTitle("실습문제 1번");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
