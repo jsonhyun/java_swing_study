@@ -25,6 +25,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
 import java.util.Calendar;
+import javax.swing.UIManager;
 
 public class Slider_SpinnerEx extends JFrame implements ChangeListener, ActionListener {
 
@@ -62,6 +63,7 @@ public class Slider_SpinnerEx extends JFrame implements ChangeListener, ActionLi
 	private JLabel lblNumber;
 	private JSpinner spDate;
 	private JLabel lblDate;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -246,8 +248,12 @@ public class Slider_SpinnerEx extends JFrame implements ChangeListener, ActionLi
 		panel_3.add(lblDate);
 		
 		pSpinner2 = new JPanel();
-		pSpinner2.setBorder(new TitledBorder(null, "JSpinner \uC608\uC81C2", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pSpinner2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC2A4\uC719 \uD398\uC778\uD305 \uBA54\uCEE4\uB2C8\uC998", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		contentPane.add(pSpinner2);
+		
+		btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(this);
+		pSpinner2.add(btnNewButton);
 		
 		slider1.addChangeListener(this);
 		slider1.setValue(100);
@@ -308,6 +314,9 @@ public class Slider_SpinnerEx extends JFrame implements ChangeListener, ActionLi
 		lblColor.setBackground(new Color(r, g, b));
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton) {
+			btnNewButtonActionPerformed(e);
+		}
 		if (e.getSource() == btnOk) {
 			btnOkActionPerformed(e);
 		}
@@ -329,5 +338,18 @@ public class Slider_SpinnerEx extends JFrame implements ChangeListener, ActionLi
 	}
 	protected void spDateStateChanged(ChangeEvent e) {
 		lblDate.setText(spDate.getValue().toString());
+	}
+	protected void btnNewButtonActionPerformed(ActionEvent e) {
+		System.out.println(contentPane.getComponentCount());
+		contentPane.remove(pSlider1);
+		System.out.println(contentPane.getComponentCount());
+		revalidate();
+		repaint();
+		
+		JLabel lblTest = new JLabel("텍스트");
+		contentPane.add(lblTest);
+		System.out.println(contentPane.getComponentCount());
+		revalidate();
+		repaint();
 	}
 }
