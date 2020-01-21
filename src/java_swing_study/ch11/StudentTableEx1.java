@@ -1,40 +1,43 @@
 package java_swing_study.ch11;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import java_swing_study.ch11.exam.Student;
 import java_swing_study.ch11.exam.StudentPanel;
 
 @SuppressWarnings("serial")
-public class StudentTableEx extends JFrame implements ActionListener {
+public class StudentTableEx1 extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private StudentPanel pStudent;
-	private JPanel pList;
+	private StudentTblPanel pList;
 	private JPanel pBtns;
 	private ArrayList<Student> stds;
 	private JButton btnAdd;
 	private JButton btnCancel;
-	private int updateIdx;
+	private JScrollPane scrollPane;
 	private StudentTblPanel pStdTbl;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentTableEx frame = new StudentTableEx();
+					StudentTableEx1 frame = new StudentTableEx1();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +46,7 @@ public class StudentTableEx extends JFrame implements ActionListener {
 		});
 	}
 
-	public StudentTableEx() {
+	public StudentTableEx1() {
 		stds = new ArrayList<Student>();
 		stds.add(new Student(1, "서현진", 80, 90, 70));
 		stds.add(new Student(2, "이성경", 90, 90, 40));
@@ -51,13 +54,12 @@ public class StudentTableEx extends JFrame implements ActionListener {
 		
 		initialize();
 		
-		pStdTbl.loadData(stds);
 	}
 
 	private void initialize() {
 		setTitle("학생 관리");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 515, 478);
+		setBounds(100, 100, 427, 478);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -66,15 +68,17 @@ public class StudentTableEx extends JFrame implements ActionListener {
 		pStudent = new StudentPanel();
 		contentPane.add(pStudent, BorderLayout.NORTH);
 
-		pList = new JPanel();
+		pList = new StudentTblPanel();
 		contentPane.add(pList, BorderLayout.CENTER);
 		pList.setLayout(new BorderLayout(0, 0));
 		
-		pStdTbl = new StudentTblPanel();
-		//바로가기 메뉴 달기
-		pStdTbl.setPopupMenu(createPopupMenu());
+		scrollPane = new JScrollPane();
+		pList.add(scrollPane, BorderLayout.CENTER);
 		
-		pList.add(pStdTbl, BorderLayout.CENTER);
+		pStdTbl = new StudentTblPanel();
+		//
+		pStdTbl.setPopupMenu(createPopupMenu());
+		scrollPane.setViewportView(pStdTbl);
 
 		pBtns = new JPanel();
 		contentPane.add(pBtns, BorderLayout.SOUTH);
@@ -87,22 +91,24 @@ public class StudentTableEx extends JFrame implements ActionListener {
 		btnCancel.addActionListener(this);
 		pBtns.add(btnCancel);
 		
+		pStdTbl.setPopupMenu(createPopupMenu());
+		
 		loadData();
 	}
-
+	
 	private void loadData() {
 	}
 
 	private Object[][] getRows() {
 		Object[][] rows = new Object[stds.size()][];
-		for(int i=0; i<rows.length; i++) {
+		for(int i=0;i<rows.length;i++) {
 			rows[i] = toArray(stds.get(i));
 		}
 		return rows;
 	}
 
 	private Object[] toArray(Student std) {
-		return new Object[] {std.getStdNo(), std.getStdName(), std.getKor(), std.getEng(), std.getMath(), std.total(), std.avg()};
+		return new Object[] {std.getStdNo(),std.getStdName(),std.getKor(),std.getEng(),std.getMath(),std.total(),std.avg()};
 	}
 
 	private String[] getColumnNames() {
@@ -113,35 +119,29 @@ public class StudentTableEx extends JFrame implements ActionListener {
 		JPopupMenu popMenu = new JPopupMenu();
 		
 		JMenuItem updateItem = new JMenuItem("수정");
-		updateItem.addActionListener(myPopMenuListener);
 		popMenu.add(updateItem);
 		
 		JMenuItem deleteItem = new JMenuItem("삭제");
-		deleteItem.addActionListener(myPopMenuListener);
 		popMenu.add(deleteItem);
 		
 		return popMenu;
 	}
 	
-	ActionListener myPopMenuListener = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals("수정")) {
-				Student upStd = pStdTbl.getSelectedItem();
-				updateIdx = pStdTbl.getSelectedRowIdx();
-				pStudent.setItem(upStd);
-				btnAdd.setText("수정");
-				pStdTbl.clearSelection();
-			}
-			if (e.getActionCommand().equals("삭제")) {
-				try {
-					pStdTbl.removeRow();
-				}catch(RuntimeException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage());
-				}
-			}
-		}
-	}; 
+//	ActionListener myPopMenuListener = new ActionListener() {
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			if (e.getActionCommand().equals("수정")) {
+//				pStudent.setItem(list.getSelectedValue());
+//				btnAdd.setText("수정");
+//				list.clearSelection();
+//			}
+//			if (e.getActionCommand().equals("삭제")) {
+//				stds.remove(list.getSelectedValue());
+//				list.setListData(new Vector<>(stds));
+//				pStudent.clearTf();
+//			}
+//		}
+//	}; 
 
 	
 	
@@ -159,22 +159,37 @@ public class StudentTableEx extends JFrame implements ActionListener {
 	}
 
 	private void btnUpdateActionPerformed(ActionEvent e) {
-		
-		Student updateStd = pStudent.getItem();
-		stds.set(stds.indexOf(updateStd), updateStd);//Database적용
-		pStdTbl.updateRow(updateStd, updateIdx);
-		btnAdd.setText("추가");
-		pStudent.clearTf();
+//		Student updateStd = pStudent.getItem();
+//		stds.set(stds.indexOf(updateStd), updateStd);
+//		list.setListData(new Vector<Student>(stds));
+//		btnAdd.setText("추가");
 	}
 
 	protected void btnAddActionPerformed(ActionEvent e) {
-		Student student = pStudent.getItem();
-		stds.add(student); //Database에 insert
-		pStdTbl.addItem(student);
-		pStudent.clearTf();
+//		Student student = pStudent.getItem();
+//		stds.add(student);
+//		list.setListData(new Vector<Student>(stds));
+//		pStudent.clearTf();
 	}
 
 	protected void btnCancelActionPerformed(ActionEvent e) {
 		pStudent.clearTf();
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
