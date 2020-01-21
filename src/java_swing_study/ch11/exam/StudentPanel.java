@@ -15,10 +15,10 @@ public class StudentPanel extends AbsItemPanel<Student> {
 	private JTextField tfStdName;
 	private JLabel lblKor;
 	private JTextField tfKor;
-	private JLabel lblMath;
-	private JTextField tfMath;
 	private JLabel lblEng;
 	private JTextField tfEng;
+	private JLabel lblMath;
+	private JTextField tfMath;
 
 	/**
 	 * Create the panel.
@@ -55,14 +55,6 @@ public class StudentPanel extends AbsItemPanel<Student> {
 		tfKor.setColumns(10);
 		add(tfKor);
 		
-		lblMath = new JLabel("수학");
-		lblMath.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblMath);
-		
-		tfMath = new JTextField();
-		tfMath.setColumns(10);
-		add(tfMath);
-		
 		lblEng = new JLabel("영어");
 		lblEng.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lblEng);
@@ -70,15 +62,23 @@ public class StudentPanel extends AbsItemPanel<Student> {
 		tfEng = new JTextField();
 		tfEng.setColumns(10);
 		add(tfEng);
+		
+		lblMath = new JLabel("수학");
+		lblMath.setHorizontalAlignment(SwingConstants.RIGHT);
+		add(lblMath);
+		
+		tfMath = new JTextField();
+		tfMath.setColumns(10);
+		add(tfMath);
 	}
 	@Override
 	public Student getItem() {
 		int stdNo = Integer.parseInt(tfStdNo.getText().trim());
 		String stdName = tfStdName.getText();
 		int kor = Integer.parseInt(tfKor.getText().trim());
-		int math = Integer.parseInt(tfMath.getText().trim());
 		int eng = Integer.parseInt(tfEng.getText().trim());
-		Student newStudent = new Student(stdNo, stdName, kor, math, eng);
+		int math = Integer.parseInt(tfMath.getText().trim());
+		Student newStudent = new Student(stdNo, stdName, kor, eng, math);
 		return newStudent;
 	}
 	@Override
@@ -86,16 +86,16 @@ public class StudentPanel extends AbsItemPanel<Student> {
 		tfStdNo.setText(item.getStdNo()+"");
 		tfStdName.setText(item.getStdName());
 		tfKor.setText(item.getKor()+"");
-		tfMath.setText(item.getMath()+"");
 		tfEng.setText(item.getEng()+"");
+		tfMath.setText(item.getMath()+"");
 	}
 	@Override
 	public void clearTf() {
 		tfStdNo.setText("");
 		tfStdName.setText("");
 		tfKor.setText("");
-		tfMath.setText("");
 		tfEng.setText("");
+		tfMath.setText("");
 	}
 
 }

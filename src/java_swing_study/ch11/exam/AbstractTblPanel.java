@@ -43,7 +43,7 @@ public abstract class AbstractTblPanel<T> extends JPanel {
 	}
 	
 	public void loadData(ArrayList<T> items) {
-		model = new NotEditableModel(getRows(items),	getColNames());
+		model = new NotEditableModel(getRows(items), getColNames());
 		table.setModel(model);
 
 		setTblWidthAlign();
@@ -90,7 +90,7 @@ public abstract class AbstractTblPanel<T> extends JPanel {
 		model.removeRow(selectedIdx);
 	}
 	
-	public abstract void updateRow(T time, int updateIdx);
+	public abstract void updateRow(T item, int updateIdx);
 	
 	public void addItem(T item) {
 		model.addRow(toArray(item));

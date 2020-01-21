@@ -13,7 +13,7 @@ public class Student {
 		this.stdNo = stdNo;
 	}
 
-	public Student(int stdNo, String stdName, int kor, int math, int eng) {
+	public Student(int stdNo, String stdName, int kor, int eng, int math) {
 		this.stdNo = stdNo;
 		this.stdName = stdName;
 		this.kor = kor;
@@ -71,7 +71,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return String.format("%2d %-10s %3d %3d %3d %3d %.2f", stdNo, stdName, kor, math, eng, total(), avg());
+		return String.format("%2d %-10s %3d %3d %3d %3d %.2f", stdNo, stdName, kor, eng, math, total(), avg());
 	}
 
 }
