@@ -1,7 +1,7 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql5-16fc6eeb637-748899ca475259d4": {
+		"mysql5-16fc82774a7-167684c23f5f85fb": {
 			"provider": "mysql",
 			"driver": "mysql5",
 			"name": "MySQL - mysql_study(root)",
@@ -17,7 +17,7 @@
 				"handlers": {}
 			}
 		},
-		"mysql5-16fc6f10ced-a72b5b6d7f87063": {
+		"mysql5-16fc8292e56-34601fc219349c0e": {
 			"provider": "mysql",
 			"driver": "mysql5",
 			"name": "MySQL - mysql_study(user_mysql_study)",
