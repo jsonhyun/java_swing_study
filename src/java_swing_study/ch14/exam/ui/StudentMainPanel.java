@@ -121,11 +121,12 @@ public class StudentMainPanel extends JPanel implements ActionListener {
 			pStdTbl.updateRow(std, updateIdx);
 			btnAdd.setText("추가");
 			pStd.clearTf();
-		}
+		}else {
 		Student std = pStd.getItem();
 		stdList.add(std);
 		pStdTbl.addItem(std);
 		pStd.clearTf();
+		}
 	}
 	protected void btnCancelActionPerformed(ActionEvent e) {
 		pStd.clearTf();

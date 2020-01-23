@@ -76,6 +76,7 @@ public class StudentPanel extends AbsItemPanel<Student> {
 	@Override
 	public Student getItem() {
 		int stdNo = Integer.parseInt(tfStdNo.getText().trim());
+		System.out.println(stdNo);
 		String stdName = tfStdName.getText();
 		int kor = Integer.parseInt(tfKor.getText().trim());
 		int eng = Integer.parseInt(tfEng.getText().trim());

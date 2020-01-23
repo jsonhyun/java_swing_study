@@ -115,11 +115,12 @@ public class DepartmentMainPanel extends JPanel implements ActionListener {
 			pDeptList.updateRow(upDept, updateIdx);
 			btnAdd.setText("추가");
 			pDept.clearTf();
-		}
+		}else {
 		Department dept = pDept.getItem();
 		deptList.add(dept);
 		pDeptList.addItem(dept);
 		pDept.clearTf();
+		}
 	}
 	protected void btnCancelActionPerformed(ActionEvent e) {
 		pDept.clearTf();
