@@ -73,7 +73,7 @@ public class OptionPaneEx extends JFrame implements ActionListener {
 	private void initialize() {
 		setTitle("팝업 다이얼로그, 파일 다이얼로그, 컬러 다이얼로그");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 376);
+		setBounds(100, 100, 600, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
