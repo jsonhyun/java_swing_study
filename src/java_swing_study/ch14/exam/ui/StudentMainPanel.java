@@ -14,7 +14,6 @@ import javax.swing.JPopupMenu;
 import java_swing_study.ch14.exam.dto.Student;
 import java_swing_study.ch14.exam.ui.panel.StudentPanel;
 import java_swing_study.ch14.exam.ui.panel.StudentTblPanel;
-import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class StudentMainPanel extends JPanel implements ActionListener {

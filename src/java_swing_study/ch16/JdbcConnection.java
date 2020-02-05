@@ -22,12 +22,11 @@ public class JdbcConnection {
 				
 		selectDepartment(url, user, password);
 		
-		insertDepartment(url, user, password);
+//		insertDepartment(url, user, password);
 		
-		updateDepartment(url, user, password);
+//		updateDepartment(url, user, password);
 		
-		deleteDepartment(url, user, password);
-
+//		deleteDepartment(url, user, password);
 	}
 
 	private static void deleteDepartment(String url, String user, String password) {
